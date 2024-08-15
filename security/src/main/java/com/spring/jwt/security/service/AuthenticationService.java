@@ -49,7 +49,8 @@ public class AuthenticationService {
             UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
             if (Objects.nonNull(userDetails)) {
                 Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
-                List<String> authoritiesList = authorities.stream()
+                List<String> authoritiesList = authorities
+                        .stream()
                         .map(GrantedAuthority::getAuthority)
                         .toList();
                 log.info("Generating Jwt token for user {} with scopes {}", request.getEmail(), authoritiesList);
